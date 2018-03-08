@@ -1,0 +1,29 @@
+<html lang="en">
+
+   <%- include header %>
+   <!-- Main component for a primary marketing message or call to action -->
+      <div class="jumbotron">
+        <h2>Kittens List</h2>
+        <p>
+          <% 
+          var kittens = {kittens};
+          kittens = kittens.kittens;
+          kittens.forEach( function (kitten)
+          { %>          
+            <img src="<%=kitten.photos%>" height="150px" width="125px">
+            <h3><%- kitten.name%></h3>
+            <span>History: <%-kitten.history%></span><br>
+            <span>Age: <%-kitten.age%></span><br>
+
+            <span><%if(kitten.fertility === 0){
+              %>Not Fertile<%
+              }else{%>Fertile<%}%></span><br>
+
+            <span><%if(kitten.adopted === 0){
+              %>Not Adopted<%
+              }else{%>Adopted<%}%></span>
+             <hr> 
+          <%});%>
+        </p>
+      </div>
+    <%- include footer %>

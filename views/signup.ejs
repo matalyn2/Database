@@ -19,6 +19,7 @@
                             <form class="form-horizontal" role="form" method="post" action="/signup" onSubmit="return checkblank(this);">
                                 <% if (message.length > 0) { %>
                                                                                                             <div class="alert alert-success col-sm-12"><%= message %></div>
+                                                                                                <% } %>
                                 <div id="signupalert" style="display:none" class="alert alert-danger">
                                     <p>Error:</p>
                                     <span></span>
@@ -30,12 +31,13 @@
                                         <input type="text" class="form-control" name="name" placeholder="Name">
                                     </div>
                                 </div>
+                                                                                                <div class="form-group">
 
                                 </div>
                                                                                                 <div class="form-group">
-                                    <label for="user_name" class="col-md-3 control-label">User Name</label>
+                                    <label for="email" class="col-md-3 control-label">Email</label>
                                     <div class="col-md-9">
-                                        <input type="text" class="form-control" name="user_name" placeholder="User Name">
+                                        <input type="text" class="form-control" name="email" placeholder="Email">
                                     </div>
                                 </div>
                                 <div class="form-group">

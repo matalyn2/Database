@@ -15,15 +15,14 @@ exports.login = function(req, res){
 
    if(req.method == "POST"){
       var post  = req.body;
-      var name= post.user_name;
+      var uname= post.user_name;
       var pass= post.password;
      
-      var sql="SELECT id, first_name, last_name, user_name FROM `users` WHERE `user_name`='"+name+"' and password = '"+pass+"'";                           
+      var sql="SELECT id, name, email FROM `users` WHERE `email`='"+uname+"' and password = '"+pass+"'";                           
       db.query(sql, function(err, results){      
          if(results.length){
             req.session.userId = results[0].id;
             req.session.user = results[0];
-            console.log(results[0].id);
             res.redirect('/home/dashboard');
          }
          else{
@@ -41,13 +40,11 @@ exports.signup = function(req, res){
    message = '';
    if(req.method == "POST"){
       var post  = req.body;
-      var name= post.user_name;
+      var uname= post.email;
       var pass= post.password;
-      var fname= post.first_name;
-      var lname= post.last_name;
-      var mob= post.mob_no;
+      var name= post.name;
 
-      var sql = "INSERT INTO `users`('id', `name`,`email`, `password`, 'created_at', 'updated_at') VALUES ('" + fname + "','" + lname + "','" + mob + "','" + name + "','" + pass + "')";
+      var sql = "INSERT INTO `users`(`name`,`email`, `password`) VALUES ('" + name + "','" + uname + "','" + pass + "')";
 
       var query = db.query(sql, function(err, result) {
 
@@ -70,13 +67,72 @@ exports.dashboard = function(req, res, next){
 		return;
 	}
 	 
-	 var sql="SELECT * FROM `login_details` WHERE `id`='"+userId+"'";
+	 var sql="SELECT name, email FROM `user` WHERE `id`='"+userId+"'";
 	 
 	   db.query(sql, function(err, results){
 		   
 		   console.log(results);
 		   
 		   res.render('profile.ejs', {user:user});	  
+		  
+		});	 
+};
+
+
+exports.kittens = function(req, res, next){
+	
+	var user =  req.session.user,
+	userId = req.session.userId;
+	
+	if(userId == null){
+		res.redirect("/home/login");
+		return;
+	}
+	 
+	 var sql="SELECT * FROM `kitten`";
+	 
+	   db.query(sql, function(err, results){
+
+		   res.render('kittens.ejs', {kittens:results});	  
+		  
+		});	 
+};
+
+
+exports.staff = function(req, res, next){
+	
+	var user =  req.session.user,
+	userId = req.session.userId;
+	
+	if(userId == null){
+		res.redirect("/home/login");
+		return;
+	}
+	 
+	 var sql="SELECT * FROM `staff`";
+	 
+	   db.query(sql, function(err, results){
+		   
+		   res.render('staff.ejs', {staff:results});	  
+		  
+		});	 
+};
+
+exports.owners = function(req, res, next){
+	
+	var user =  req.session.user,
+	userId = req.session.userId;
+	
+	if(userId == null){
+		res.redirect("/home/login");
+		return;
+	}
+	 
+	 var sql="SELECT * FROM `owner`";
+	 
+	   db.query(sql, function(err, results){
+
+		   res.render('owners.ejs', {owner:results});	  
 		  
 		});	 
 };

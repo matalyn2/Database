@@ -1,0 +1,21 @@
+<html lang="en">
+
+   <%- include header %>
+   <!-- Main component for a primary marketing message or call to action -->
+      <div class="jumbotron">
+        <h2>Staff List</h2>
+        <p>
+          <%
+          var staff = {staff};
+          staff = staff.staff;
+          staff.forEach( function (person)
+          { %>
+            <h3><%-person.id%> - <%- person.name%></h3>
+            <span><%-person.email%></span><br>
+            <span><%-person.phone%></span><br>
+            <span><%-person.address%></span> 
+            <hr>                
+          <%}); %>
+        </p>
+      </div>
+    <%- include footer %>
