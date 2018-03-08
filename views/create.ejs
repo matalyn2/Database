@@ -1,0 +1,38 @@
+<html lang="en">
+
+   <%- include header %>
+   <!-- Main component for a primary marketing message or call to action -->
+      <div class="jumbotron">
+        <h1>Add New...</h1>
+        <form class="form-horizontal" role="form" method="post" onSubmit="return checkblank(this);" action="/home/create">
+            <input type="hidden" class="form-control" name="form_name" value="kitten_form">
+            <input type="text" class="form-control" name="kitten_name" placeholder="Name">
+            <input type="text" class="form-control" name="kitten_age" placeholder="Name">
+            <input type="text" class="form-control" name="kitten_history" placeholder="Name">
+            <input type="text" class="form-control" name="kitten_fertility" placeholder="Name">
+            <input type="text" class="form-control" name="kitten_adopted" placeholder="Name">
+            <input type="text" class="form-control" name="kitten_photos" placeholder="Name">
+          <input type="submit" value="Submit">
+        </form>
+<hr>
+
+        <form class="form-horizontal" role="form" method="post" onSubmit="return checkblank(this);" action="/home/create">
+            <input type="hidden" class="form-control" name="form_name" value="owner_form">
+            <input type="text" class="form-control" name="owner_name" placeholder="Name">
+            <input type="text" class="form-control" name="owner_email" placeholder="Name">
+            <input type="text" class="form-control" name="owner_phone" placeholder="Name">
+            <input type="text" class="form-control" name="owner_address" placeholder="Name">
+          <input type="submit" value="Submit">
+        </form>
+<hr>
+
+        <form class="form-horizontal" role="form" method="post" onSubmit="return checkblank(this);" action="/home/create">
+            <input type="hidden" class="form-control" name="form_name" value="staff_form">
+            <input type="text" class="form-control" name="staff_name" placeholder="Name">
+            <input type="text" class="form-control" name="staff_email" placeholder="Name">
+            <input type="text" class="form-control" name="staff_phone" placeholder="Name">
+            <input type="text" class="form-control" name="staff_address" placeholder="Name">
+          <input type="submit" value="Submit">
+        </form>
+      </div>
+    <%- include footer %>

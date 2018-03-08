@@ -1,0 +1,16 @@
+<html lang="en">
+
+   <%- include header %>
+   <!-- Main component for a primary marketing message or call to action -->
+      <div class="jumbotron">
+        <h2>Add New Staff Member</h2>
+
+        <form class="form-horizontal" role="form" method="post" onSubmit="return checkblank(this);" action="/home/newstaff">
+            <input type="text" class="form-control" name="staff_name" placeholder="Name">
+            <input type="text" class="form-control" name="staff_email" placeholder="Email">
+            <input type="text" class="form-control" name="staff_phone" placeholder="Phone Number">
+            <input type="text" class="form-control" name="staff_address" placeholder="Address">
+          <input type="submit" value="Submit">
+        </form>
+      </div>
+    <%- include footer %>

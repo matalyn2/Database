@@ -1,0 +1,17 @@
+<html lang="en">
+
+   <%- include header %>
+   <!-- Main component for a primary marketing message or call to action -->
+      <div class="jumbotron">
+        <h2>Add New Kitten</h2>
+        <form class="form-horizontal" role="form" method="post" onSubmit="return checkblank(this);" action="/home/newkitten">
+            <input type="text" class="form-control" name="kitten_name" placeholder="Name">
+            <input type="text" class="form-control" name="kitten_age" placeholder="Age">
+            <input type="text" class="form-control" name="kitten_history" placeholder="History">
+            <input type="checkbox" class="form-control" name="kitten_fertility" placeholder="Fertile">
+            <input type="checkbox" class="form-control" name="kitten_adopted" placeholder="Adopted">
+            <input type="text" class="form-control" name="kitten_photos" placeholder="Photo Url">
+          <input type="submit" value="Submit">
+        </form>
+      </div>
+    <%- include footer %>

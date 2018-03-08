@@ -3,7 +3,14 @@
    <%- include header %>
    <!-- Main component for a primary marketing message or call to action -->
       <div class="jumbotron">
-        <h2>Owners List</h2>
+        <h1>Owners List</h1>
+        <h3>Delete an Owner</h3>
+        <p>ID:</p>
+        <form class="form-horizontal" role="form" method="post" onSubmit="return checkblank(this);" action="/home/owners">
+          <input type="text" class="form-control" name="owner_name" placeholder="ID">          
+          <input type="submit" value="Submit">
+        </form>
+        <hr>
         <p>
         <%
           var owners = {owner};

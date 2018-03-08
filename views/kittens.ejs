@@ -3,7 +3,14 @@
    <%- include header %>
    <!-- Main component for a primary marketing message or call to action -->
       <div class="jumbotron">
-        <h2>Kittens List</h2>
+        <h1>Kittens List</h1>
+        <h3>Delete a Kitten</h3>
+        <p>ID:</p>
+        <form class="form-horizontal" role="form" method="post" onSubmit="return checkblank(this);" action="/home/kittens">
+        <input type="text" class="form-control" name="kitten_name" placeholder="ID">
+          <input type="submit" value="Submit">
+        </form>
+        <hr>
         <p>
           <% 
           var kittens = {kittens};
@@ -11,7 +18,7 @@
           kittens.forEach( function (kitten)
           { %>          
             <img src="<%=kitten.photos%>" height="150px" width="125px">
-            <h3><%- kitten.name%></h3>
+            <h3><%-kitten.id%> - <%- kitten.name%></h3>
             <span>History: <%-kitten.history%></span><br>
             <span>Age: <%-kitten.age%></span><br>
 

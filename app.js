@@ -47,12 +47,21 @@ app.get('/home/dashboard', user.dashboard);//call for dashboard page after login
 app.get('/home/kittens', user.kittens);//call for dashboard page after login
 app.get('/home/staff', user.staff);//call for dashboard page after login
 app.get('/home/owners', user.owners);//call for dashboard page after login
-
+app.get('/home/newkitten', user.newkitten);//call for dashboard page after login
+app.get('/home/newowner', user.newowner);//call for dashboard page after login
+app.get('/home/newstaff', user.newstaff);//call for dashboard page after login
 
 
 //Middleware
 app.post('/login', user.login);//call for login post
 app.post('/signup', user.signup);//call for signup post
+app.post('/home/kittens', user.kittens);//call for dashboard page after login
+app.post('/home/staff', user.staff);//call for dashboard page after login
+app.post('/home/owners', user.owners);//call for dashboard page after login
+app.post('/home/newkitten', user.newkitten);//call for dashboard page after login
+app.post('/home/newowner', user.newowner);//call for dashboard page after login
+app.post('/home/newstaff', user.newstaff);//call for dashboard page after login
+
 
 reload(app);
 app.listen(8080)

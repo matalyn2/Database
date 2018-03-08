@@ -83,19 +83,35 @@ exports.kittens = function(req, res, next){
 	
 	var user =  req.session.user,
 	userId = req.session.userId;
-	
-	if(userId == null){
-		res.redirect("/home/login");
-		return;
-	}
-	 
-	 var sql="SELECT * FROM `kitten`";
-	 
-	   db.query(sql, function(err, results){
+
+   if(req.method == "POST"){
+      var post  = req.body;
+      var kitten_name= post.kitten_name;
+
+      var sql="DELETE FROM kitten WHERE id='"+kitten_name+"'";	 
+	   	db.query(sql, function(err, results){
+		   console.log(results.affectedRows);	  		  
+		});
+
+		var sql_select="SELECT * FROM `kitten`";	 
+	   	db.query(sql_select, function(err, results){
+		   res.render('kittens.ejs', {kittens:results});	  		  
+		});
+
+  	} else{
+
+		if(userId == null){
+			res.redirect("/home/login");
+			return;
+		}
+		 
+		var sql="SELECT * FROM `kitten`";	 
+	   	db.query(sql, function(err, results){
 
 		   res.render('kittens.ejs', {kittens:results});	  
 		  
-		});	 
+		});
+	}	 
 };
 
 
@@ -103,6 +119,22 @@ exports.staff = function(req, res, next){
 	
 	var user =  req.session.user,
 	userId = req.session.userId;
+
+	 if(req.method == "POST"){
+	      var post  = req.body;
+	      var staff_name= post.staff_name;
+
+	      var sql="DELETE FROM staff WHERE id='"+staff_name+"'";	 
+		   	db.query(sql, function(err, results){
+			   console.log(results.affectedRows);	  		  
+			});
+
+			var sql_select="SELECT * FROM `staff`";	 
+		   	db.query(sql_select, function(err, results){
+			   res.render('staff.ejs', {staff:results});	  		  
+			});
+
+  	} else{
 	
 	if(userId == null){
 		res.redirect("/home/login");
@@ -115,13 +147,29 @@ exports.staff = function(req, res, next){
 		   
 		   res.render('staff.ejs', {staff:results});	  
 		  
-		});	 
+		});
+	}	 
 };
 
 exports.owners = function(req, res, next){
 	
 	var user =  req.session.user,
 	userId = req.session.userId;
+
+	if(req.method == "POST"){
+      var post  = req.body;
+      var owner_name= post.owner_name;
+
+      var sql="DELETE FROM owner WHERE id='"+owner_name+"'";	 
+	   	db.query(sql, function(err, results){
+		   console.log(results.affectedRows);	  		  
+		});
+
+		var sql_select="SELECT * FROM `owner`";	 
+	   	db.query(sql_select, function(err, results){
+		   res.render('owners.ejs', {owner:results});	  		  
+		});
+  	} else{
 	
 	if(userId == null){
 		res.redirect("/home/login");
@@ -134,5 +182,115 @@ exports.owners = function(req, res, next){
 
 		   res.render('owners.ejs', {owner:results});	  
 		  
-		});	 
+		});
+	}	 
+};
+
+
+exports.newstaff = function(req, res, next){
+	
+	var user =  req.session.user,
+	userId = req.session.userId;
+
+	if(req.method == "POST"){
+
+      var post  = req.body;
+      var name= post.staff_name;
+      var email = post.staff_email;
+      var phone = post.staff_phone;
+      var address = post.staff_address;
+
+      var sql = "INSERT INTO staff(name, email, phone, address) VALUES ('" + name + "','" + email + "','" + phone + "','" + address +"')";
+	   	db.query(sql, function(err, results){
+		   console.log(results);	  		  
+		});
+
+		var sql_select="SELECT * FROM `owner`";	 
+	   	db.query(sql_select, function(err, results){
+		   res.render('staff.ejs', {staff:results});	  		  
+		});
+
+  	} else {
+
+		if(userId == null){
+			res.redirect("/home/login");
+			return;
+		}
+		 
+		res.render('new_staff.ejs');	  
+			  
+			
+	}	 
+};
+
+exports.newowner = function(req, res, next){
+	
+	var user =  req.session.user,
+	userId = req.session.userId;
+
+	if(req.method == "POST"){
+      var post  = req.body;
+      var name= post.owner_name;
+      var email = post.owner_email;
+      var phone = post.owner_phone;
+      var address = post.owner_address;
+
+      var sql = "INSERT INTO owner(name, email, phone, address) VALUES ('" + name + "','" + email + "','" + phone + "','" + address +"')";
+	   	db.query(sql, function(err, results){
+		   console.log(results);	  		  
+		});
+
+		var sql_select="SELECT * FROM `owner`";	 
+	   	db.query(sql_select, function(err, results){
+		   res.render('owners.ejs', {owner:results});	  		  
+		});
+
+  	} else {
+
+		if(userId == null){
+			res.redirect("/home/login");
+			return;
+		}
+		 
+		res.render('new_owner.ejs');	  
+
+			  
+	}	 
+};
+
+exports.newkitten = function(req, res, next){
+	
+	var user =  req.session.user,
+	userId = req.session.userId;
+
+	if(req.method == "POST"){
+
+      var post  = req.body;
+      var name= post.kitten_name;
+      var history = post.kitten_history;
+      var age = post.kitten_age;
+      if(post.kitten_fertility){ var fertility = 1;} else{ var fertility = 0;}
+      if(post.kitten_adopted){ var adopted = 1;} else{ var adopted = 0;}
+      var photos = post.kitten_photos;
+
+      var sql = "INSERT INTO kitten(name, history, age, fertility, adopted, photos) VALUES ('" + name + "','" + history + "'," + age + "," + fertility +"," + adopted + ",'" + photos + "')";
+	   	db.query(sql, function(err, results){
+		   console.log(results);	  		  
+		});
+
+		var sql_select="SELECT * FROM `kitten`";	 
+	   	db.query(sql_select, function(err, results){
+		   res.render('kittens.ejs', {kittens:results});	  		  
+		});
+
+  	} else {
+
+		if(userId == null){
+			res.redirect("/home/login");
+			return;
+		}
+		 
+		res.render('new_kitten.ejs');	  
+			  
+	}	 
 };
