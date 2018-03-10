@@ -4,10 +4,17 @@
    <!-- Main component for a primary marketing message or call to action -->
       <div class="jumbotron">
         <h1>Kittens List</h1>
+        <% 
+        var message = {message};
+          if(message.message){
+            %>
+            <p style="color:red"><%= message.message %></p>
+          <%}
+        %>
         <h3>Delete a Kitten</h3>
         <p>ID:</p>
         <form class="form-horizontal" role="form" method="post" onSubmit="return checkblank(this);" action="/home/kittens">
-        <input type="text" class="form-control" name="kitten_name" placeholder="ID">
+        <input type="number" class="form-control" name="kitten_name" placeholder="ID">
           <input type="submit" value="Submit">
         </form>
         <hr>
@@ -18,9 +25,9 @@
           kittens.forEach( function (kitten)
           { %>          
             <img src="<%=kitten.photos%>" height="150px" width="125px">
-            <h3><%-kitten.id%> - <%- kitten.name%></h3>
-            <span>History: <%-kitten.history%></span><br>
-            <span>Age: <%-kitten.age%></span><br>
+            <h3><%=kitten.id%> - <%= kitten.name%></h3>
+            <span>History: <%=kitten.history%></span><br>
+            <span>Age: <%=kitten.age%></span><br>
 
             <span><%if(kitten.fertility === 0){
               %>Not Fertile<%

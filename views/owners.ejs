@@ -5,9 +5,16 @@
       <div class="jumbotron">
         <h1>Owners List</h1>
         <h3>Delete an Owner</h3>
+        <% 
+        var message = {message};
+          if(message.message){
+            %>
+            <p style="color:red"><%= message.message %></p>
+          <%}
+        %>
         <p>ID:</p>
         <form class="form-horizontal" role="form" method="post" onSubmit="return checkblank(this);" action="/home/owners">
-          <input type="text" class="form-control" name="owner_name" placeholder="ID">          
+          <input type="number" class="form-control" name="owner_name" placeholder="ID">          
           <input type="submit" value="Submit">
         </form>
         <hr>
@@ -17,10 +24,10 @@
           owners = owners.owner;
           owners.forEach( function (person)
           { %>
-            <h3><%-person.id%> - <%- person.name%></h3>
-            <span><%-person.email%></span><br>
-            <span><%-person.phone%></span><br>
-            <span><%-person.address%></span> 
+            <h3><%=person.id%> - <%= person.name%></h3>
+            <span><%=person.email%></span><br>
+            <span><%=person.phone%></span><br>
+            <span><%=person.address%></span> 
             <hr>            
           <%}); %>
         </p>
