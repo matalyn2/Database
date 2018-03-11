@@ -313,8 +313,8 @@ exports.newkitten = function(req, res, next){
 		formData.parse(req, function(err, fields, files) {
 	    	 //here you can read the appropriate fields/files
 	    	 var n = Object.keys(files).map(function(key) {
-		    return files[key];
-		});
+		    	return files[key];
+			});
 	    	 var x = n[0];
 	    	 var y = x[0];
 	    	 name = fields.kitten_name;
@@ -323,18 +323,13 @@ exports.newkitten = function(req, res, next){
 	    	 if(fields.kitten_fertility){ fertility = 1;} else{ fertility = 0;}
 			 if(fields.kitten_adopted){ adopted = 1;} else{ adopted = 0;}
 			var filename = y.originalFilename;
+			console.log(filename);
 			var targetPath = '/img/' + filename;
-			if(name !== '' || history !== '' || age !== '' || filename !== ''){
-				message = "Missing information on form."
-			} else {
-				var sql = "INSERT INTO kitten(name, history, age, fertility, adopted, photos) VALUES ('" + name + "','" + history + "'," + age + "," + fertility +"," + adopted + ",'" + targetPath + "')";
-			   	db.query(sql, function(err, results){
-				   console.log(results);
-				   console.log(err);	  		  
-				});
-				
-			}
-
+			var sql = "INSERT INTO kitten(name, history, age, fertility, adopted, photos) VALUES ('" + name + "','" + history + "'," + age + "," + fertility +"," + adopted + ",'" + targetPath + "')";
+		   	db.query(sql, function(err, results){
+			   console.log(results);
+			   console.log(err);	  		  
+			});
    		});
 
    		req.busboy.on('file', function (fieldname, file, filename) {
