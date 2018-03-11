@@ -312,9 +312,9 @@ exports.newkitten = function(req, res, next){
       
 		formData.parse(req, function(err, fields, files) {
 	    	 //here you can read the appropriate fields/files
-	    	 let n = Object.values(files);
-	    	 let x = n[0];
-	    	 let y = x[0];
+	    	 var n = Object.values(files);
+	    	 var x = n[0];
+	    	 var y = x[0];
 	    	 name = fields.kitten_name;
 	    	 history = fields.kitten_history;
 	    	 age = fields.kitten_age;

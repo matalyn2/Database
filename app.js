@@ -12,7 +12,6 @@ var express = require('express')
 //var methodOverride = require('method-override');
 var app = express();
 var mysql      = require('mysql');
-const validator = require('express-validator');
 var bodyParser=require("body-parser");
 var busboy = require('connect-busboy');
 var connection = mysql.createConnection({
@@ -31,7 +30,6 @@ app.set('port', process.env.PORT || 8080);
 app.set('views', __dirname + '/views');
 app.set('view engine', 'ejs');
 
-app.use(validator());
 app.use(busboy());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
